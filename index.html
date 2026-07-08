@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TravelbyNeche · Adventures</title>
+  <!-- Tailwind via CDN + base styles -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome icons (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* smooth scroll & custom hover transitions */
+    html { scroll-behavior: smooth; }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      z-index: 50;
+      border-radius: 8px;
+      padding: 0.5rem 0;
+      top: 100%;
+      left: 0;
+    }
+    .dropdown:hover .dropdown-content { display: block; }
+    .dropdown-content a {
+      display: block;
+      padding: 0.5rem 1.2rem;
+      color: #1F2937;
+      transition: background 0.15s;
+    }
+    .dropdown-content a:hover {
+      background-color: #F1F5F9;
+      color: #0F766E;
+    }
+    /* sticky footer using flex */
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #F8FAFC;
+      color: #1F2937;
+    }
+    main { flex: 1 0 auto; }
+    .footer { flex-shrink: 0; }
+    /* hero overlay */
+    .hero-overlay {
+      background: linear-gradient(135deg, rgba(15,118,110,0.65) 0%, rgba(37,99,235,0.4) 100%);
+    }
+    /* card hover */
+    .card-hover {
+      transition: transform 0.25s ease, box-shadow 0.3s;
+    }
+    .card-hover:hover {
+      transform: scale(1.02);
+      box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15);
+    }
+    /* gradient btn */
+    .btn-gradient {
+      background: linear-gradient(135deg, #0F766E, #2563EB);
+      transition: all 0.2s;
+    }
+    .btn-gradient:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(15,118,110,0.35);
+    }
+    /* accordion (FAQ) – pure css details/summary */
+    details summary {
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::after {
+      content: "▼";
+      font-size: 0.8rem;
+      color: #0F766E;
+      transition: transform 0.2s;
+    }
+    details[open] summary::after { transform: rotate(180deg); }
+    /* hamburger menu (no JS, using checkbox trick) */
+    #menu-toggle:checked + label + .nav-menu { display: flex; }
+    .nav-menu { display: none; }
+    @media (min-width: 1024px) { .nav-menu { display: flex; } }
+  </style>
+</head>
+<body>
+  <!-- STICKY NAVIGATION (sticky top-0 z-50) -->
+   
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm border-b border-teal-100/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between py-3">
+      <!-- Logo -->
+      <div class="flex items-center gap-2">
+        <i class="fas fa-plane-departure text-teal-700 text-2xl"></i>
+        <span class="font-bold text-2xl tracking-tight text-teal-800">Travelby<span class="text-amber-500">Neche</span></span>
+      </div>
+
+      <!-- mobile toggle -->
+      <input type="checkbox" id="menu-toggle" class="hidden">
+      <label for="menu-toggle" class="lg:hidden text-2xl text-gray-700 cursor-pointer">
+        <i class="fas fa-bars"></i>
+      </label>
+
+      <!-- Navigation -->
+      <nav class="nav-menu flex-col lg:flex-row lg:flex w-full lg:w-auto items-start lg:items-center gap-2 lg:gap-1 mt-4 lg:mt-0 text-sm font-medium text-gray-700 relative">
+        <!-- Home -->
+        <div class="dropdown relative group w-full lg:w-auto">
+          <a href="index.html" class="block px-3 py-2 hover:text-teal-700 transition">Home <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+          <div class="dropdown-content">
+             <a href="#hero">Hero</a><a href="#Featured Tours">Featured Tours</a><a href="#why choose us">why choose us</a><a href="#Featured packages">Featured packages</a>
+            <a href="#Customer Reviews">Customer Reviews</a><a href="#Newsletter">Newsletter</a><a href="#FAQ">FAQ</a><a href="#contact">contact</a></div>
+        </div>
+        <!-- About (active) -->
+        <div class="dropdown relative group w-full lg:w-auto">
+          <a href="about.html" class="block px-3 py-2 text-teal-700 font-semibold">About <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+          <div class="dropdown-content"><a href="#our story">Our Story</a><a href="#meet our team">Team</a><a href="#mission">Mission</a>
+            <a href="#Testimonials">Testimonials</a><a href="#company Statistics">company Statistics</a><a href="#want to know more?"> want to know more?</a></div>
+        </div>
+        <!-- Destinations -->
+        <div class="dropdown relative group w-full lg:w-auto">
+          <a href="destination.html" class="block px-3 py-2 hover:text-teal-700 transition">Destinations <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+          <div class="dropdown-content"><a href="#">Africa</a><a href="#Destinations">Destinations</a><a href="#travel Packages">travel packages</a><a href="#Featured spotlight">Featured spotlight</a></div>
+        </div>
+        <!-- Packages -->
+        <div class="dropdown relative group w-full lg:w-auto">
+          <a href="travel.html" class="block px-3 py-2 hover:text-teal-700 transition">Packages <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+          <div class="dropdown-content"><a href="#">Family</a><a href="#">Couple</a><a href="#">Luxury</a><a href="#">Adventure</a><a href="#">Budget</a></div>
+        </div>
+        <!-- Blog -->
+        <div class="dropdown relative group w-full lg:w-auto">
+          <a href="blog.html" class="block px-3 py-2 hover:text-teal-700 transition">Blog <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+          <div class="dropdown-content"><a href="#">News</a><a href="#">Tips</a><a href="#">Food</a><a href="#">Culture</a></div>
+        </div>
+        <!-- FAQ -->
+        <div class="dropdown relative group w-full lg:w-auto">
+          <a href="FAQ.html" class="block px-3 py-2 hover:text-teal-700 transition">FAQ <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+          <div class="dropdown-content"><a href="#">Booking</a><a href="#">Payment</a><a href="#">Visa</a><a href="#">Insurance</a></div>
+        </div>
+        <!-- Customer Service -->
+        <div class="dropdown relative group w-full lg:w-auto">
+          <a href="contact.html" class="block px-3 py-2 hover:text-teal-700 transition">Service <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+          <div class="dropdown-content"><a href="#">Help Center</a><a href="#">Support</a><a href="#">Live Chat</a><a href="#">Complaints</a></div>
+        </div>
+        <!-- CTA -->
+        <a href="contact.html" class="btn-gradient text-white px-5 py-2 rounded-full ml-0 lg:ml-2 w-full lg:w-auto text-center shadow-md">Book Now</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <main>
+    <!-- ===== HERO ===== -->
+    <section id="hero" class="relative h-[90vh] flex items-center justify-center bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1400&auto=format&fit=crop');">
+      <div class="absolute inset-0 hero-overlay"></div>
+      <div class="relative z-10 max-w-4xl mx-auto text-center text-white px-6">
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight drop-shadow-lg">Discover Beautiful Places Around the World</h1>
+        <p class="text-lg md:text-xl mt-4 text-white/90 max-w-2xl mx-auto">Explore amazing destinations with affordable travel packages and unforgettable adventures.</p>
+        <div class="mt-8 flex flex-wrap justify-center gap-4">
+          <a href="contact.html" class="btn-gradient text-white px-8 py-3 rounded-full text-lg font-semibold shadow-xl">Book Now</a>
+          <a href="FAQ.html" class="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-white/30 transition">Learn More</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== POPULAR DESTINATIONS ===== -->
+    <section id="Featured Tours" class="py-16 px-4 max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-12 text-teal-800">🌍 Popular Destinations</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="card-hover rounded-2xl overflow-hidden shadow-lg bg-white"><img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&auto=format&fit=crop" class="w-full h-48 object-cover" alt="Paris"><div class="p-4 text-center font-semibold text-lg">Paris</div></div>
+        <div class="card-hover rounded-2xl overflow-hidden shadow-lg bg-white"><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&auto=format&fit=crop" class="w-full h-48 object-cover" alt="Dubai"><div class="p-4 text-center font-semibold text-lg">Dubai</div></div>
+        <div class="card-hover rounded-2xl overflow-hidden shadow-lg bg-white"><img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=600&auto=format&fit=crop" class="w-full h-48 object-cover" alt="Maldives"><div class="p-4 text-center font-semibold text-lg">Maldives</div></div>
+        <div class="card-hover rounded-2xl overflow-hidden shadow-lg bg-white"><img src="https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?w=600&auto=format&fit=crop" class="w-full h-48 object-cover" alt="Bali"><div class="p-4 text-center font-semibold text-lg">Bali</div></div>
+        <div class="card-hover rounded-2xl overflow-hidden shadow-lg bg-white"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3qdegFgRC8FkA5d6r9OVNzeRX5SsndNU0QPbIh2l3dw&s=10w=600&auto=format&fit=crop" class="w-full h-48 object-cover" alt="Cape Town"><div class="p-4 text-center font-semibold text-lg">Cape Town</div></div>
+        <div class="card-hover rounded-2xl overflow-hidden shadow-lg bg-white"><img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&auto=format&fit=crop" class="w-full h-48 object-cover" alt="Santorini"><div class="p-4 text-center font-semibold text-lg">Santorini</div></div>
+      </div>
+    </section>
+
+    <!-- ===== WHY CHOOSE US ===== -->
+    <section id="why choose us" class="py-16 px-4 bg-white/60">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-12 text-teal-800">✨ Why Choose Us</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div><i class="fas fa-user-tie text-5xl text-teal-600"></i><p class="mt-3 font-semibold">Experienced Guides</p></div>
+          <div><i class="fas fa-shield-alt text-5xl text-amber-500"></i><p class="mt-3 font-semibold">Safe Travel</p></div>
+          <div><i class="fas fa-tags text-5xl text-blue-500"></i><p class="mt-3 font-semibold">Affordable Prices</p></div>
+          <div><i class="fas fa-headset text-5xl text-teal-600"></i><p class="mt-3 font-semibold">24/7 Support</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FEATURED PACKAGES ===== -->
+    <section id="Featured packages" class="py-16 px-4 max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-12 text-teal-800">🏝️ Featured Packages</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="card-hover rounded-2xl overflow-hidden shadow-xl bg-white">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&auto=format&fit=crop" class="h-52 w-full object-cover">
+          <div class="p-4"><div class="flex justify-between"><span class="font-bold text-teal-700">$499</span><span class="text-amber-500">⭐ 4.8</span></div><p class="text-sm text-gray-500">3 Days · Beach</p><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div>
+        </div>
+        <div class="card-hover rounded-2xl overflow-hidden shadow-xl bg-white">
+          <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=600&auto=format&fit=crop" class="h-52 w-full object-cover">
+          <div class="p-4"><div class="flex justify-between"><span class="font-bold text-teal-700">$799</span><span class="text-amber-500">⭐ 4.9</span></div><p class="text-sm text-gray-500">5 Days · Safari</p><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div>
+        </div>
+        <div class="card-hover rounded-2xl overflow-hidden shadow-xl bg-white">
+          <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&auto=format&fit=crop" class="h-52 w-full object-cover">
+          <div class="p-4"><div class="flex justify-between"><span class="font-bold text-teal-700">$1,299</span><span class="text-amber-500">⭐ 4.7</span></div><p class="text-sm text-gray-500">7 Days · Luxury</p><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CUSTOMER REVIEWS ===== -->
+    <section id="Customer Reviews" class="py-16 px-4 bg-teal-50">
+      <div class="max-w-7xl mx-auto"><h2 class="text-3xl font-bold text-center mb-12 text-teal-800">💬 Customer Reviews</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-2xl shadow"><p class="italic">“Amazing trip to Bali! Everything was perfectly organized.”</p><div class="mt-3 font-bold">— Sarah</div><div class="text-amber-400">★★★★★</div></div>
+          <div class="bg-white p-6 rounded-2xl shadow"><p class="italic">“The safari was incredible. Our guide was so knowledgeable.”</p><div class="mt-3 font-bold">— Mike</div><div class="text-amber-400">★★★★★</div></div>
+          <div class="bg-white p-6 rounded-2xl shadow"><p class="italic">“Great value for money. We'll book again with TravelbyNeche.”</p><div class="mt-3 font-bold">— Emily</div><div class="text-amber-400">★★★★☆</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== NEWSLETTER ===== -->
+    <section id="Newsletter" class="py-16 px-4 max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl font-bold text-teal-800">📬 Newsletter</h2>
+      <p class="text-gray-600 mt-2">Subscribe for exclusive deals & travel tips</p>
+      <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center"><input type="email" placeholder="Your email" class="border border-gray-300 rounded-full px-6 py-3 flex-1 max-w-sm shadow-sm"><button class="btn-gradient text-white px-8 py-3 rounded-full font-semibold">Subscribe</button></div>
+    </section>
+
+    <!-- ===== FAQ (accordion) ===== -->
+    <section id="FAQ" class="py-12 px-4 max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-8 text-teal-800">❓ FAQ</h2>
+      <div class="bg-white rounded-2xl shadow divide-y divide-gray-200">
+        <details class="p-5"><summary class="font-semibold text-gray-800">How do I book?</summary><p class="mt-3 text-gray-600">Simply click the “Book Now” button on any package or contact our support.</p></details>
+        <details class="p-5"><summary class="font-semibold text-gray-800">What payment methods do you accept?</summary><p class="mt-3 text-gray-600">We accept credit cards, PayPal, and bank transfers.</p></details>
+        <details class="p-5"><summary class="font-semibold text-gray-800">Do I need a visa?</summary><p class="mt-3 text-gray-600">Visa requirements depend on your destination. Check our visa guide or contact us.</p></details>
+        <details class="p-5"><summary class="font-semibold text-gray-800">Is travel insurance included?</summary><p class="mt-3 text-gray-600">Insurance is optional but highly recommended. We offer plans during booking.</p></details>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" class="py-16 px-4 bg-white max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-10 text-teal-800">📞 Contact / Customer Service</h2>
+      <div class="grid md:grid-cols-2 gap-12">
+        <div><form class="space-y-4"><input type="text" placeholder="Name" class="w-full border p-3 rounded-xl"><input type="email" placeholder="Email" class="w-full border p-3 rounded-xl"><input type="text" placeholder="Phone" class="w-full border p-3 rounded-xl"><textarea rows="4" placeholder="Message" class="w-full border p-3 rounded-xl"></textarea><button class="btn-gradient text-white px-8 py-3 rounded-full w-full font-semibold">Send Message</button></form></div>
+        <div class="space-y-6"><div><i class="fas fa-map-pin text-teal-600 w-6"></i> 123 Adventure Ave, Travel City</div><div><i class="fas fa-envelope text-teal-600 w-6"></i> hello@travelbyneche.com</div><div><i class="fas fa-phone text-teal-600 w-6"></i> +1 (555) 123-4567</div><div><i class="fas fa-comment-dots text-teal-600 w-6"></i> Live Chat (click to start)</div><div class="h-48 bg-gray-200 rounded-xl flex items-center justify-center text-gray-500"><i class="fas fa-map mr-2"></i> Google Map</div><div class="flex gap-4 text-2xl text-teal-600"><i class="fab fa-facebook"></i><i class="fab fa-instagram"></i><i class="fab fa-twitter"></i><i class="fab fa-youtube"></i></div></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== STICKY FOOTER ===== -->
+  <footer class="footer sticky bg-teal-900 text-white/90 py-10 px-4 mt-12">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div><h4 class="font-bold text-white">About</h4><ul class="mt-2 space-y-1 text-sm"><li>Our Story</li><li>Mission</li><li>Vision</li></ul></div>
+      <div><h4 class="font-bold text-white">Quick Links</h4><ul class="mt-2 space-y-1 text-sm"><li>Packages</li><li>Blog</li><li>FAQ</li></ul></div>
+      <div><h4 class="font-bold text-white">Contact</h4><ul class="mt-2 space-y-1 text-sm"><li>Help Center</li><li>Support</li><li>Live Chat</li></ul></div>
+      <div><h4 class="font-bold text-white">Newsletter</h4><p class="text-sm mt-2">Get updates</p><div class="flex mt-2"><input type="email" placeholder="Email" class="p-2 rounded-l text-sm flex-1"><button class="bg-amber-500 px-4 rounded-r text-sm font-semibold">Go</button></div></div>
+    </div>
+    <div class="border-t border-teal-700 mt-8 pt-6 text-center text-sm flex flex-wrap justify-center gap-4"><span>© 2026 TravelbyNeche Adventures</span><span>Privacy Policy</span><span>Terms</span><span>Booking</span><span>Testimonials</span></div>
+  </footer>
+</body>
+</html>

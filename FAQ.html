@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ · TravelbyNeche Adventures</title>
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #F8FAFC;
+            color: #1F2937;
+        }
+        main {
+            flex: 1 0 auto;
+        }
+        .footer {
+            flex-shrink: 0;
+        }
+
+        /* dropdown (no JS) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            padding: 0.5rem 0;
+            top: 100%;
+            left: 0;
+            z-index: 50;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content a {
+            display: block;
+            padding: 0.5rem 1.5rem;
+            color: #1F2937;
+            transition: background 0.15s, color 0.15s;
+        }
+        .dropdown-content a:hover {
+            background-color: #F1F5F9;
+            color: #0F766E;
+        }
+
+        /* gradient buttons */
+        .btn-gradient {
+            background: linear-gradient(135deg, #0F766E, #2563EB);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-gradient:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(15, 118, 110, 0.35);
+        }
+
+        /* mobile hamburger: checkbox hack */
+        #menu-toggle:checked+label+.nav-menu {
+            display: flex;
+        }
+        .nav-menu {
+            display: none;
+        }
+        @media (min-width: 1024px) {
+            .nav-menu {
+                display: flex;
+            }
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0F766E;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .section-title span {
+            color: #F59E0B;
+        }
+
+        /* FAQ Accordion Styles */
+        .faq-item {
+            border-bottom: 1px solid #e5e7eb;
+            transition: background 0.2s;
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .faq-item:hover {
+            background: #f8fafc;
+        }
+        .faq-item summary {
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            font-weight: 600;
+            color: #1F2937;
+            transition: color 0.2s;
+        }
+        .faq-item summary:hover {
+            color: #0F766E;
+        }
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+        .faq-item summary::after {
+            content: "▼";
+            font-size: 0.8rem;
+            color: #0F766E;
+            transition: transform 0.3s ease;
+            margin-left: 1rem;
+        }
+        .faq-item[open] summary::after {
+            transform: rotate(180deg);
+        }
+        .faq-item .answer {
+            padding: 0 1.5rem 1.25rem 1.5rem;
+            color: #4B5563;
+            line-height: 1.7;
+        }
+        .faq-item .answer ul {
+            list-style: disc;
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        .faq-item .answer ul li {
+            margin-bottom: 0.25rem;
+        }
+
+        /* Category badges */
+        .category-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            letter-spacing: 0.3px;
+        }
+        .badge-booking {
+            background: #0F766E15;
+            color: #0F766E;
+        }
+        .badge-payment {
+            background: #2563EB15;
+            color: #2563EB;
+        }
+        .badge-visa {
+            background: #F59E0B15;
+            color: #D97706;
+        }
+        .badge-insurance {
+            background: #8B5CF615;
+            color: #7C3AED;
+        }
+        .badge-general {
+            background: #6B728015;
+            color: #4B5563;
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== STICKY HEADER ===== -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm border-b border-teal-100/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between py-3">
+            <!-- Logo -->
+            <div class="flex items-center gap-2">
+                <i class="fas fa-plane-departure text-teal-700 text-2xl"></i>
+                <span class="font-bold text-2xl tracking-tight text-teal-800">Travelby<span class="text-amber-500">Neche</span></span>
+            </div>
+
+            <!-- mobile toggle -->
+            <input type="checkbox" id="menu-toggle" class="hidden">
+            <label for="menu-toggle" class="lg:hidden text-2xl text-gray-700 cursor-pointer">
+                <i class="fas fa-bars"></i>
+            </label>
+
+            <!-- Navigation -->
+            <nav class="nav-menu flex-col lg:flex-row lg:flex w-full lg:w-auto items-start lg:items-center gap-2 lg:gap-1 mt-4 lg:mt-0 text-sm font-medium text-gray-700 relative">
+                <!-- Home -->
+                <div class="dropdown relative group w-full lg:w-auto">
+                    <a href="index.html" class="block px-3 py-2 hover:text-teal-700 transition">Home <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+                    <div class="dropdown-content">
+                    <a href="#hero">Hero</a><a href="#Featured Tours">Featured Tours</a><a href="#why choose us">why choose us</a><a href="#Featured packages">Featured packages</a>
+                    <a href="#Customer Reviews">Customer Reviews</a><a href="#Newsletter">Newsletter</a><a href="#FAQ">FAQ</a><a href="#contact">contact</a>
+                </div>
+                  
+                </div>
+                <!-- About -->
+                <div class="dropdown relative group w-full lg:w-auto">
+                    <a href="about.html" class="block px-3 py-2 hover:text-teal-700 transition">About <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+                    <div class="dropdown-content"><a href="#our story">Our Story</a><a href="#meet our team">Team</a><a href="#mission">Mission</a>
+                     <a href="#Testimonials">Testimonials</a><a href="#company Statistics">company Statistics</a><a href="#want to know more?"> want to know more?</a></div>
+                </div>
+                <!-- Destinations -->
+                <div class="dropdown relative group w-full lg:w-auto">
+                    <a href="destination.html" class="block px-3 py-2 hover:text-teal-700 transition">Destinations <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#">Africa</a><a href="#Destinations">Destinations</a><a href="#travel Packages">travel packages</a><a href="#Featured spotlight">Featured spotlight</a></div>
+                </div>
+                <!-- Packages -->
+                <div class="dropdown relative group w-full lg:w-auto">
+                    <a href="travel.html" class="block px-3 py-2 hover:text-teal-700 transition">Packages <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+                    <div class="dropdown-content"><a href="#">Family</a><a href="#">Couple</a><a href="#">Luxury</a><a href="#">Adventure</a><a href="#">Budget</a></div>
+                </div>
+                <!-- Blog -->
+                <div class="dropdown relative group w-full lg:w-auto">
+                    <a href="blog.html" class="block px-3 py-2 hover:text-teal-700 transition">Blog <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+                    <div class="dropdown-content"><a href="#">News</a><a href="#">Tips</a><a href="#">Food</a><a href="#">Culture</a></div>
+                </div>
+                <!-- FAQ (active) -->
+                <div class="dropdown relative group w-full lg:w-auto">
+                    <a href="FAQ.html" class="block px-3 py-2 text-teal-700 font-semibold">FAQ <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+                    <div class="dropdown-content"><a href="#">Booking</a><a href="#">Payment</a><a href="#">Visa</a><a href="#">Insurance</a></div>
+                </div>
+                <!-- Customer Service -->
+                <div class="dropdown relative group w-full lg:w-auto">
+                    <a href="contact.html" class="block px-3 py-2 hover:text-teal-700 transition">Service <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+                    <div class="dropdown-content"><a href="#">Help Center</a><a href="#">Support</a><a href="#">Live Chat</a><a href="#">Complaints</a></div>
+                </div>
+                <!-- CTA -->
+                <a href="contact.html" class="btn-gradient text-white px-5 py-2 rounded-full ml-0 lg:ml-2 w-full lg:w-auto text-center shadow-md">Book Now</a>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- ===== MAIN: FAQ ===== -->
+    <main class="px-4 py-12 max-w-4xl mx-auto">
+
+
+        <!-- Page Header -->
+        <div class="text-center mb-12">
+            <h1 class="section-title">❓ Frequently Asked <span>Questions</span></h1>
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto">Find answers to the most common questions about booking, payments, visas, insurance, and more.</p>
+        </div>
+
+        <!-- Search / quick filter (visual only) -->
+        <div class="mb-8 flex flex-wrap gap-2 justify-center">
+            <span class="category-badge badge-booking">📋 Booking</span>
+            <span class="category-badge badge-payment">💳 Payment</span>
+            <span class="category-badge badge-visa">🛂 Visa</span>
+            <span class="category-badge badge-insurance">🛡️ Insurance</span>
+            <span class="category-badge badge-general">📌 General</span>
+        </div>
+
+        <!-- ===== FAQ ACCORDION ===== -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+
+            <!-- 1. Booking -->
+            <details class="faq-item" open>
+                <summary>
+                    <span><span class="category-badge badge-booking mr-2">Booking</span> How do I book a trip?</span>
+                </summary>
+                <div class="answer">
+                    <p>You can book a trip in three easy ways:</p>
+                    <ul>
+                        <li><strong>Online:</strong> Browse our packages and click "Book Now" on any listing.</li>
+                        <li><strong>Phone:</strong> Call us at <a href="tel:+15551234567" class="text-teal-700 font-semibold">+1 (555) 123-4567</a> and our team will assist you.</li>
+                        <li><strong>Email:</strong> Send your inquiry to <a href="mailto:hello@travelbyneche.com" class="text-teal-700 font-semibold">hello@travelbyneche.com</a> and we'll respond within 24 hours.</li>
+                    </ul>
+                    <p class="mt-2">Once you complete your booking, you'll receive a confirmation email with all the details.</p>
+                </div>
+            </details>
+
+            <!-- 2. Payment -->
+            <details class="faq-item">
+                <summary>
+                    <span><span class="category-badge badge-payment mr-2">Payment</span> What payment methods do you accept?</span>
+                </summary>
+                <div class="answer">
+                    <p>We accept a variety of payment methods to make your booking convenient:</p>
+                    <ul>
+                        <li><strong>Credit/Debit Cards:</strong> Visa, Mastercard, American Express, and Discover.</li>
+                        <li><strong>Digital Wallets:</strong> PayPal, Apple Pay, and Google Pay.</li>
+                        <li><strong>Bank Transfers:</strong> Direct bank transfers are available for larger bookings.</li>
+                        <li><strong>Installment Plans:</strong> We offer flexible payment plans for select packages.</li>
+                    </ul>
+                    <p class="mt-2">All payments are processed through our secure, encrypted payment gateway.</p>
+                </div>
+            </details>
+
+            <!-- 3. Visa -->
+            <details class="faq-item">
+                <summary>
+                    <span><span class="category-badge badge-visa mr-2">Visa</span> Do I need a visa for my destination?</span>
+                </summary>
+                <div class="answer">
+                    <p>Visa requirements vary by destination and your country of citizenship. Here's what you need to know:</p>
+                    <ul>
+                        <li><strong>Visa-Free Travel:</strong> Many destinations offer visa-free entry for citizens of certain countries.</li>
+                        <li><strong>Visa on Arrival:</strong> Some countries allow you to obtain a visa upon arrival at the airport.</li>
+                        <li><strong>E-Visa:</strong> Many countries now offer electronic visas that can be applied for online.</li>
+                        <li><strong>Traditional Visa:</strong> Some destinations require you to apply at an embassy or consulate in advance.</li>
+                    </ul>
+                    <p class="mt-2">We provide a visa guide for every package, and our team can assist you with the application process. Contact us for personalized support.</p>
+                </div>
+            </details>
+
+            <!-- 4. Insurance -->
+            <details class="faq-item">
+                <summary>
+                    <span><span class="category-badge badge-insurance mr-2">Insurance</span> Is travel insurance included?</span>
+                </summary>
+                <div class="answer">
+                    <p>Travel insurance is <strong>not automatically included</strong> in our packages, but we <strong>highly recommend</strong> purchasing it for your protection.</p>
+                    <ul>
+                        <li><strong>What it covers:</strong> Medical emergencies, trip cancellations, lost luggage, flight delays, and more.</li>
+                        <li><strong>How to get it:</strong> We offer competitive insurance plans during the booking process. You can also purchase insurance independently.</li>
+                        <li><strong>Our recommendation:</strong> We partner with trusted insurance providers to offer comprehensive coverage at affordable rates.</li>
+                    </ul>
+                    <p class="mt-2">Contact us if you need help choosing the right plan for your trip.</p>
+                </div>
+            </details>
+
+            <!-- 5. Cancellation -->
+            <details class="faq-item">
+                <summary>
+                    <span><span class="category-badge badge-general mr-2">General</span> What is your cancellation policy?</span>
+                </summary>
+                <div class="answer">
+                    <p>Our cancellation policy is designed to be flexible while protecting our operations:</p>
+                    <ul>
+                        <li><strong>30+ days before departure:</strong> Full refund (minus administrative fees).</li>
+                        <li><strong>15-29 days before departure:</strong> 50% refund.</li>
+                        <li><strong>7-14 days before departure:</strong> 25% refund.</li>
+                        <li><strong>Less than 7 days:</strong> No refund, but we may offer credit toward a future booking.</li>
+                    </ul>
+                    <p class="mt-2">Please note that some packages may have different policies. Check your booking confirmation for specific details.</p>
+                </div>
+            </details>
+
+            <!-- 6. Changes -->
+            <details class="faq-item">
+                <summary>
+                    <span><span class="category-badge badge-general mr-2">General</span> Can I make changes to my booking?</span>
+                </summary>
+                <div class="answer">
+                    <p>Yes, we understand that plans can change. Here's what you need to know:</p>
+                    <ul>
+                        <li><strong>Date Changes:</strong> Subject to availability. Fees may apply depending on how close to the departure date.</li>
+                        <li><strong>Package Changes:</strong> You can upgrade or downgrade your package, subject to availability and price differences.</li>
+                        <li><strong>Passenger Changes:</strong> Name changes are possible but may incur administrative fees.</li>
+                    </ul>
+                    <p class="mt-2">Contact our support team as early as possible to make changes to your booking.</p>
+                </div>
+            </details>
+
+            <!-- 7. Group Discounts -->
+            <details class="faq-item">
+                <summary>
+                    <span><span class="category-badge badge-booking mr-2">Booking</span> Do you offer group discounts?</span>
+                </summary>
+                <div class="answer">
+                    <p>Absolutely! We offer special rates for groups of 10 or more travelers.</p>
+                    <ul>
+                        <li><strong>10-15 travelers:</strong> 10% discount on the total package price.</li>
+                        <li><strong>16-25 travelers:</strong> 15% discount.</li>
+                        <li><strong>26+ travelers:</strong> Custom pricing available upon request.</li>
+                    </ul>
+                    <p class="mt-2">Contact our group booking specialist at <a href="mailto:groups@travelbyneche.com" class="text-teal-700 font-semibold">groups@travelbyneche.com</a> for a personalized quote.</p>
+                </div>
+            </details>
+
+            <!-- 8. Student Discounts -->
+            <details class="faq-item">
+                <summary>
+                    <span><span class="category-badge badge-booking mr-2">Booking</span> Do you offer student discounts?</span>
+                </summary>
+                <div class="answer">
+                    <p>Yes! We offer special discounts for students with a valid student ID.</p>
+                    <ul>
+                        <li><strong>Student Discount:</strong> Up to 15% off select packages.</li>
+                        <li><strong>Eligibility:</strong> Full-time students with a valid student ID or university email.</li>
+                        <li><strong>How to book:</strong> Contact our team directly to verify your student status and receive your discount.</li>
+                    </ul>
+                    <p class="mt-2">We also offer budget-friendly packages specifically designed for student travelers.</p>
+                </div>
+            </details>
+
+            <!-- 9. Safety -->
+            <details class="faq-item">
+                <summary>
+                    <span><span class="category-badge badge-insurance mr-2">Insurance</span> Is it safe to travel with you?</span>
+                </summary>
+                <div class="answer">
+                    <p>Your safety is our top priority. Here's how we ensure a safe travel experience:</p>
+                    <ul>
+                        <li><strong>Vetted Partners:</strong> We carefully screen all hotels, transportation providers, and local guides.</li>
+                        <li><strong>Safety Protocols:</strong> All our tours follow strict safety guidelines and emergency procedures.</li>
+                        <li><strong>24/7 Support:</strong> Our team is available around the clock to assist you during your trip.</li>
+                        <li><strong>Travel Advisories:</strong> We monitor travel advisories and will adjust itineraries if needed.</li>
+                    </ul>
+                    <p class="mt-2">Read more about our <a href="#" class="text-teal-700 font-semibold">safety commitment</a> on our website.</p>
+                </div>
+            </details>
+
+            <!-- 10. Contact -->
+            <details class="faq-item">
+                <summary>
+                    <span><span class="category-badge badge-general mr-2">General</span> How can I contact customer service?</span>
+                </summary>
+                <div class="answer">
+                    <p>We're here to help! Reach out to us through any of these channels:</p>
+                    <ul>
+                        <li><strong>Phone:</strong> <a href="tel:+15551234567" class="text-teal-700 font-semibold">+1 (555) 123-4567</a> (24/7 support)</li>
+                        <li><strong>Email:</strong> <a href="mailto:support@travelbyneche.com" class="text-teal-700 font-semibold">support@travelbyneche.com</a></li>
+                        <li><strong>Live Chat:</strong> Available on our website (click the chat icon in the bottom right corner).</li>
+                        <li><strong>Social Media:</strong> Reach us on Facebook, Instagram, or Twitter – we respond within 2 hours.</li>
+                    </ul>
+                    <p class="mt-2">Our average response time is under 2 hours during business hours.</p>
+                </div>
+            </details>
+
+        </div>
+
+        <!-- Still have questions? -->
+        <div class="mt-12 text-center bg-gradient-to-r from-teal-50 to-amber-50/50 rounded-2xl p-8">
+            <h3 class="text-xl font-bold text-teal-800 mb-2">Still have questions?</h3>
+            <p class="text-gray-600 mb-4">We're here to help you with any other questions you might have.</p>
+            <a href="#" class="btn-gradient text-white px-8 py-3 rounded-full font-semibold inline-flex items-center gap-2 shadow-md">
+                <i class="fas fa-headset"></i> Contact Support
+            </a>
+        </div>
+
+       
+    </main>
+
+
+     <!-- ===== MAIN: ADDITIONAL PAGES ===== -->
+  
+    <main class="px-4 py-8 max-w-7xl mx-auto">
+    
+    
+    <!-- ===== 2. BOOKING ===== -->
+    <section class="mb-16" id="booking">
+      <h2 class="section-title"><i class="fas fa-calendar-check text-amber-500 mr-2"></i> Booking Information</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="booking-card bg-white p-6 rounded-2xl shadow card-hover border border-teal-100/30">
+          <i class="fas fa-magnifying-glass text-3xl text-teal-600"></i>
+          <h4 class="font-bold text-lg mt-3">1. Choose Your Package</h4>
+          <p class="text-sm text-gray-600">Browse our curated selection of family, luxury, beach, adventure, honeymoon, and student packages.</p>
+        </div>
+        <div class="booking-card bg-white p-6 rounded-2xl shadow card-hover border border-teal-100/30">
+          <i class="fas fa-pen-to-square text-3xl text-amber-500"></i>
+          <h4 class="font-bold text-lg mt-3">2. Fill in Details</h4>
+          <p class="text-sm text-gray-600">Provide traveler information, special requests, and choose your preferred dates.</p>
+        </div>
+        <div class="booking-card bg-white p-6 rounded-2xl shadow card-hover border border-teal-100/30">
+          <i class="fas fa-credit-card text-3xl text-blue-500"></i>
+          <h4 class="font-bold text-lg mt-3">3. Secure Payment</h4>
+          <p class="text-sm text-gray-600">Complete your booking with our secure payment gateway. Instant confirmation via email.</p>
+        </div>
+      </div>
+      <div class="mt-6 text-center">
+        <a href="#" class="btn-gradient text-white px-10 py-3 rounded-full font-semibold shadow-lg inline-flex items-center gap-2"><i class="fas fa-rocket"></i> Start Booking Now</a>
+      </div>
+    </section>
+
+    <!-- ===== 3. TESTIMONIALS ===== -->
+    <section class="mb-16" id="testimonials">
+      <h2 class="section-title"><i class="fas fa-star text-amber-500 mr-2"></i> Testimonials</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-2xl shadow card-hover">
+          <div class="stars">★★★★★</div>
+          <p class="italic text-gray-700 mt-3">“The safari was absolutely incredible! Our guide was so knowledgeable and we saw the Big Five. Life-changing experience!”</p>
+          <div class="flex items-center gap-3 mt-4"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&auto=format&fit=crop&crop=face" class="w-12 h-12 rounded-full object-cover"><div><h4 class="font-bold">James M.</h4><p class="text-sm text-gray-500">Kenya Safari, 2025</p></div></div>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow card-hover">
+          <div class="stars">★★★★★</div>
+          <p class="italic text-gray-700 mt-3">“Our honeymoon in Santorini was everything we dreamed of and more. The sunset views, the food, the luxury – perfect.”</p>
+          <div class="flex items-center gap-3 mt-4"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=60&auto=format&fit=crop&crop=face" class="w-12 h-12 rounded-full object-cover"><div><h4 class="font-bold">Sarah & Alex</h4><p class="text-sm text-gray-500">Honeymoon Package, 2026</p></div></div>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow card-hover">
+          <div class="stars">★★★★☆</div>
+          <p class="italic text-gray-700 mt-3">“Excellent value for money. The family package to Bali was well-organized and the kids loved every moment. Highly recommend.”</p>
+          <div class="flex items-center gap-3 mt-4"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&auto=format&fit=crop&crop=face" class="w-12 h-12 rounded-full object-cover"><div><h4 class="font-bold">The Parkers</h4><p class="text-sm text-gray-500">Family Trip, 2025</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 4. PRIVACY POLICY ===== -->
+    <section class="mb-16" id="privacy">
+      <h2 class="section-title"><i class="fas fa-shield-halved text-amber-500 mr-2"></i> Privacy Policy</h2>
+      <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 max-w-4xl mx-auto">
+        <p class="text-gray-700 leading-relaxed"><strong>Effective Date:</strong> January 1, 2026</p>
+        <p class="text-gray-700 leading-relaxed mt-3">At TravelbyNeche Adventures, we are committed to protecting your privacy. This policy explains how we collect, use, and safeguard your personal information.</p>
+        <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-4 space-y-2">
+          <li><strong>Information We Collect:</strong> Name, email, phone, payment details, and travel preferences.</li>
+          <li><strong>How We Use It:</strong> To process bookings, send confirmations, and personalize your travel experience.</li>
+          <li><strong>Data Security:</strong> We use industry-standard encryption and never share your data with third parties without consent.</li>
+          <li><strong>Your Rights:</strong> You may request access, correction, or deletion of your data anytime.</li>
+          <li><strong>Cookies:</strong> We use essential cookies to improve site functionality.</li>
+        </ul>
+        <p class="text-gray-700 leading-relaxed mt-4">For full details, please <a href="#" class="text-teal-700 underline">contact our privacy officer</a>.</p>
+      </div>
+    </section>
+
+    <!-- ===== 5. TERMS & CONDITIONS ===== -->
+    <section class="mb-12" id="terms">
+      <h2 class="section-title"><i class="fas fa-file-contract text-amber-500 mr-2"></i> Terms & Conditions</h2>
+      <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 max-w-4xl mx-auto">
+        <p class="text-gray-700 leading-relaxed"><strong>Last Updated:</strong> January 1, 2026</p>
+        <p class="text-gray-700 leading-relaxed mt-3">By booking with TravelbyNeche Adventures, you agree to the following terms:</p>
+        <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-4 space-y-2">
+          <li><strong>Booking Confirmation:</strong> A booking is confirmed upon receipt of full payment or deposit.</li>
+          <li><strong>Cancellations:</strong> Cancellations made 30+ days before departure receive a full refund. Within 30 days, a partial refund applies.</li>
+          <li><strong>Travel Insurance:</strong> We strongly recommend purchasing travel insurance for unforeseen events.</li>
+          <li><strong>Liability:</strong> TravelbyNeche acts as an agent and is not liable for third-party service failures.</li>
+          <li><strong>Changes:</strong> We reserve the right to modify itineraries due to weather or safety concerns.</li>
+          <li><strong>Governing Law:</strong> These terms are governed by the laws of Travel City.</li>
+        </ul>
+        <p class="text-gray-700 leading-relaxed mt-4">By proceeding with a booking, you accept these terms. <a href="#" class="text-teal-700 underline">Read full terms</a>.</p>
+      </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <div class="text-center py-8">
+      <p class="text-gray-600">Have questions? <a href="#" class="text-teal-700 font-semibold underline decoration-amber-400">Contact our support team</a> – we're here 24/7.</p>
+    </div>
+  </main>
+
+    <!-- ===== STICKY FOOTER ===== -->
+    <footer class="footer sticky bg-teal-900 text-white/90 py-10 px-4 mt-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div>
+                <h4 class="font-bold text-white">About</h4>
+                <ul class="mt-2 space-y-1 text-sm">
+                    <li>Our Story</li>
+                    <li>Mission</li>
+                    <li>Vision</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white">Quick Links</h4>
+                <ul class="mt-2 space-y-1 text-sm">
+                    <li>Packages</li>
+                    <li>Blog</li>
+                    <li>FAQ</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white">Contact</h4>
+                <ul class="mt-2 space-y-1 text-sm">
+                    <li>Help Center</li>
+                    <li>Support</li>
+                    <li>Live Chat</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white">Newsletter</h4>
+                <p class="text-sm mt-2">Get updates</p>
+                <div class="flex mt-2">
+                    <input type="email" placeholder="Email" class="p-2 rounded-l text-sm flex-1">
+                    <button class="bg-amber-500 px-4 rounded-r text-sm font-semibold">Go</button>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-teal-700 mt-8 pt-6 text-center text-sm flex flex-wrap justify-center gap-4">
+            <span>© 2026 TravelbyNeche Adventures</span>
+            <span>Privacy Policy</span>
+            <span>Terms</span>
+            <span>Booking</span>
+            <span>Testimonials</span>
+        </div>
+    </footer>
+</body>
+</html>

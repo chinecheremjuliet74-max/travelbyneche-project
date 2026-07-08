@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Packages · TravelbyNeche Adventures</title>
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #F8FAFC;
+      color: #1F2937;
+    }
+    main { flex: 1 0 auto; }
+    .footer { flex-shrink: 0; }
+
+    /* dropdown (no JS) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background: white;
+      min-width: 200px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      border-radius: 12px;
+      padding: 0.5rem 0;
+      top: 100%;
+      left: 0;
+      z-index: 50;
+    }
+    .dropdown:hover .dropdown-content { display: block; }
+    .dropdown-content a {
+      display: block;
+      padding: 0.5rem 1.5rem;
+      color: #1F2937;
+      transition: background 0.15s, color 0.15s;
+    }
+    .dropdown-content a:hover {
+      background-color: #F1F5F9;
+      color: #0F766E;
+    }
+
+    /* gradient buttons */
+    .btn-gradient {
+      background: linear-gradient(135deg, #0F766E, #2563EB);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-gradient:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 24px rgba(15,118,110,0.35);
+    }
+
+    /* card hover */
+    .card-hover {
+      transition: transform 0.25s ease, box-shadow 0.3s;
+    }
+    .card-hover:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 30px -10px rgba(0,0,0,0.12);
+    }
+
+    /* mobile hamburger: checkbox hack */
+    #menu-toggle:checked + label + .nav-menu { display: flex; }
+    .nav-menu { display: none; }
+    @media (min-width: 1024px) { .nav-menu { display: flex; } }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0F766E;
+      border-left: 6px solid #F59E0B;
+      padding-left: 1rem;
+      margin-bottom: 2rem;
+    }
+    .package-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #F59E0B;
+      color: #1F2937;
+      font-weight: 700;
+      padding: 0.25rem 1rem;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== STICKY HEADER ===== -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm border-b border-teal-100/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between py-3">
+      <!-- Logo -->
+      <div class="flex items-center gap-2">
+        <i class="fas fa-plane-departure text-teal-700 text-2xl"></i>
+        <span class="font-bold text-2xl tracking-tight text-teal-800">Travelby<span class="text-amber-500">Neche</span></span>
+      </div>
+
+      <!-- mobile toggle -->
+      <input type="checkbox" id="menu-toggle" class="hidden">
+      <label for="menu-toggle" class="lg:hidden text-2xl text-gray-700 cursor-pointer">
+        <i class="fas fa-bars"></i>
+      </label>
+
+      <!-- Navigation -->
+      <nav class="nav-menu flex-col lg:flex-row lg:flex w-full lg:w-auto items-start lg:items-center gap-2 lg:gap-1 mt-4 lg:mt-0 text-sm font-medium text-gray-700 relative">
+        <!-- Home -->
+        <div class="dropdown relative group w-full lg:w-auto">
+          <a href="index.html" class="block px-3 py-2 hover:text-teal-700 transition">Home <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+          <div class="dropdown-content">
+             <a href="#hero">Hero</a><a href="#Featured Tours">Featured Tours</a><a href="#why choose us">why choose us</a><a href="#Featured packages">Featured packages</a>
+            <a href="#Customer Reviews">Customer Reviews</a><a href="#Newsletter">Newsletter</a><a href="#FAQ">FAQ</a><a href="#contact">contact</a></div>
+        </div>
+        <!-- About (active) -->
+        <div class="dropdown relative group w-full lg:w-auto">
+          <a href="about.html" class="block px-3 py-2 text-teal-700 font-semibold">About <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+          <div class="dropdown-content"><a href="#our story">Our Story</a><a href="#meet our team">Team</a><a href="#mission">Mission</a>
+            <a href="#Testimonials">Testimonials</a><a href="#company Statistics">company Statistics</a><a href="#want to know more?"> want to know more?</a></div>
+        </div>
+        <!-- Destinations -->
+        <div class="dropdown relative group w-full lg:w-auto">
+          <a href="destination.html" class="block px-3 py-2 hover:text-teal-700 transition">Destinations <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+          <div class="dropdown-content"><a href="#">Africa</a><a href="#Destinations">Destinations</a><a href="#travel Packages">travel packages</a><a href="#Featured spotlight">Featured spotlight</a></div>
+        </div>
+        <!-- Packages -->
+        <div class="dropdown relative group w-full lg:w-auto">
+          <a href="travel.html" class="block px-3 py-2 hover:text-teal-700 transition">Packages <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+          <div class="dropdown-content"><a href="#">Family</a><a href="#">Couple</a><a href="#">Luxury</a><a href="#">Adventure</a><a href="#">Budget</a></div>
+        </div>
+        <!-- Blog -->
+        <div class="dropdown relative group w-full lg:w-auto">
+          <a href="blog.html" class="block px-3 py-2 hover:text-teal-700 transition">Blog <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+          <div class="dropdown-content"><a href="#">News</a><a href="#">Tips</a><a href="#">Food</a><a href="#">Culture</a></div>
+        </div>
+        <!-- FAQ -->
+        <div class="dropdown relative group w-full lg:w-auto">
+          <a href="FAQ.html" class="block px-3 py-2 hover:text-teal-700 transition">FAQ <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+          <div class="dropdown-content"><a href="#">Booking</a><a href="#">Payment</a><a href="#">Visa</a><a href="#">Insurance</a></div>
+        </div>
+        <!-- Customer Service -->
+        <div class="dropdown relative group w-full lg:w-auto">
+          <a href="contact.html" class="block px-3 py-2 hover:text-teal-700 transition">Service <i class="fas fa-chevron-down text-[10px] ml-1"></i></a>
+          <div class="dropdown-content"><a href="#">Help Center</a><a href="#">Support</a><a href="#">Live Chat</a><a href="#">Complaints</a></div>
+        </div>
+        <!-- CTA -->
+        <a href="contact.html" class="btn-gradient text-white px-5 py-2 rounded-full ml-0 lg:ml-2 w-full lg:w-auto text-center shadow-md">Book Now</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- ===== MAIN: TRAVEL PACKAGES ===== -->
+  <main class="px-4 py-8 max-w-7xl mx-auto">
+    <h1 class="text-4xl md:text-5xl font-extrabold text-center text-teal-800 mt-4 mb-2">✈️ Travel Packages</h1>
+    <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">Find your perfect getaway – from family fun to luxury escapes, beach bliss, and student adventures.</p>
+
+    <!-- ===== 1. FAMILY TRIPS ===== -->
+    <section class="mb-16">
+      <h2 class="section-title"><i class="fas fa-users text-amber-500 mr-2"></i> Family Trips</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover relative"><span class="package-badge">👨‍👩‍👧‍👦 Family</span><img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=600&auto=format&fit=crop" class="h-48 w-full object-cover"><div class="p-4"><h4 class="font-bold text-lg">Disney Magic</h4><div class="flex justify-between text-sm"><span>4 Days / 3 Nights</span><span class="text-teal-700 font-bold">$349</span></div><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div></div>
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover relative"><span class="package-badge">👨‍👩‍👧‍👦 Family</span><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&auto=format&fit=crop" class="h-48 w-full object-cover"><div class="p-4"><h4 class="font-bold text-lg">Beach Resort Fun</h4><div class="flex justify-between text-sm"><span>5 Days / 4 Nights</span><span class="text-teal-700 font-bold">$429</span></div><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div></div>
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover relative"><span class="package-badge">👨‍👩‍👧‍👦 Family</span><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&auto=format&fit=crop" class="h-48 w-full object-cover"><div class="p-4"><h4 class="font-bold text-lg">Mountain Retreat</h4><div class="flex justify-between text-sm"><span>3 Days / 2 Nights</span><span class="text-teal-700 font-bold">$279</span></div><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div></div>
+      </div>
+    </section>
+
+    <!-- ===== 2. LUXURY TOURS ===== -->
+    <section class="mb-16">
+      <h2 class="section-title"><i class="fas fa-crown text-amber-500 mr-2"></i> Luxury Tours</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover relative"><span class="package-badge">💎 Luxury</span><img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=600&auto=format&fit=crop" class="h-48 w-full object-cover"><div class="p-4"><h4 class="font-bold text-lg">Parisian Elegance</h4><div class="flex justify-between text-sm"><span>6 Days / 5 Nights</span><span class="text-teal-700 font-bold">$1,899</span></div><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div></div>
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover relative"><span class="package-badge">💎 Luxury</span><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&auto=format&fit=crop" class="h-48 w-full object-cover"><div class="p-4"><h4 class="font-bold text-lg">Dubai Royal</h4><div class="flex justify-between text-sm"><span>5 Days / 4 Nights</span><span class="text-teal-700 font-bold">$2,199</span></div><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div></div>
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover relative"><span class="package-badge">💎 Luxury</span><img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=600&auto=format&fit=crop" class="h-48 w-full object-cover"><div class="p-4"><h4 class="font-bold text-lg">Maldives Overwater</h4><div class="flex justify-between text-sm"><span>7 Days / 6 Nights</span><span class="text-teal-700 font-bold">$3,499</span></div><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div></div>
+      </div>
+    </section>
+
+    <!-- ===== 3. BEACH HOLIDAYS ===== -->
+    <section class="mb-16">
+      <h2 class="section-title"><i class="fas fa-umbrella-beach text-amber-500 mr-2"></i> Beach Holidays</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover relative"><span class="package-badge">🏖️ Beach</span><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&auto=format&fit=crop" class="h-48 w-full object-cover"><div class="p-4"><h4 class="font-bold text-lg">Bali Sunset</h4><div class="flex justify-between text-sm"><span>5 Days / 4 Nights</span><span class="text-teal-700 font-bold">$599</span></div><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div></div>
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover relative"><span class="package-badge">🏖️ Beach</span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMTWDUggsoFrNZAU4tKHYTX4zDIPoFz3AOm6kPNfYmpg&s=10?w=600&auto=format&fit=crop" class="h-48 w-full object-cover"><div class="p-4"><h4 class="font-bold text-lg">Cape Town Coast</h4><div class="flex justify-between text-sm"><span>6 Days / 5 Nights</span><span class="text-teal-700 font-bold">$749</span></div><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div></div>
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover relative"><span class="package-badge">🏖️ Beach</span><img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&auto=format&fit=crop" class="h-48 w-full object-cover"><div class="p-4"><h4 class="font-bold text-lg">Santorini Seaside</h4><div class="flex justify-between text-sm"><span>4 Days / 3 Nights</span><span class="text-teal-700 font-bold">$899</span></div><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div></div>
+      </div>
+    </section>
+
+    <!-- ===== 4. ADVENTURE TOURS ===== -->
+    <section class="mb-16">
+      <h2 class="section-title"><i class="fas fa-mountain text-amber-500 mr-2"></i> Adventure Tours</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover relative"><span class="package-badge">🧗 Adventure</span><img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&auto=format&fit=crop" class="h-48 w-full object-cover"><div class="p-4"><h4 class="font-bold text-lg">Himalayan Trek</h4><div class="flex justify-between text-sm"><span>8 Days / 7 Nights</span><span class="text-teal-700 font-bold">$1,299</span></div><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div></div>
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover relative"><span class="package-badge">🧗 Adventure</span><img src="https://images.unsplash.com/photo-1502672023488-70e25813eb80?w=600&auto=format&fit=crop" class="h-48 w-full object-cover"><div class="p-4"><h4 class="font-bold text-lg">Safari Expedition</h4><div class="flex justify-between text-sm"><span>6 Days / 5 Nights</span><span class="text-teal-700 font-bold">$1,499</span></div><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div></div>
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover relative"><span class="package-badge">🧗 Adventure</span><img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&auto=format&fit=crop" class="h-48 w-full object-cover"><div class="p-4"><h4 class="font-bold text-lg">Amazon Rainforest</h4><div class="flex justify-between text-sm"><span>7 Days / 6 Nights</span><span class="text-teal-700 font-bold">$1,199</span></div><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div></div>
+      </div>
+    </section>
+
+    <!-- ===== 5. HONEYMOON PACKAGES ===== -->
+    <section class="mb-16">
+      <h2 class="section-title"><i class="fas fa-heart text-amber-500 mr-2"></i> Honeymoon Packages</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover relative"><span class="package-badge">❤️ Honeymoon</span><img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&auto=format&fit=crop" class="h-48 w-full object-cover"><div class="p-4"><h4 class="font-bold text-lg">Maldives Romance</h4><div class="flex justify-between text-sm"><span>5 Days / 4 Nights</span><span class="text-teal-700 font-bold">$2,499</span></div><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div></div>
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover relative"><span class="package-badge">❤️ Honeymoon</span><img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&auto=format&fit=crop" class="h-48 w-full object-cover"><div class="p-4"><h4 class="font-bold text-lg">Santorini Sunset</h4><div class="flex justify-between text-sm"><span>6 Days / 5 Nights</span><span class="text-teal-700 font-bold">$2,199</span></div><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div></div>
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover relative"><span class="package-badge">❤️ Honeymoon</span><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&auto=format&fit=crop" class="h-48 w-full object-cover"><div class="p-4"><h4 class="font-bold text-lg">Dubai Luxury</h4><div class="flex justify-between text-sm"><span>4 Days / 3 Nights</span><span class="text-teal-700 font-bold">$1,899</span></div><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div></div>
+      </div>
+    </section>
+
+    <!-- ===== 6. STUDENT DISCOUNTS ===== -->
+    <section class="mb-12">
+      <h2 class="section-title"><i class="fas fa-graduation-cap text-amber-500 mr-2"></i> Student Discounts</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover relative"><span class="package-badge">🎓 Student</span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUSMI_8tH5XOuo_3pVemH7GfCJk4xHkXRwaGcEFKhzvw&s=10?w=600&auto=format&fit=crop" class="h-48 w-full object-cover"><div class="p-4"><h4 class="font-bold text-lg">Europe Backpacker</h4><div class="flex justify-between text-sm"><span>10 Days / 9 Nights</span><span class="text-teal-700 font-bold">$599</span></div><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div></div>
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover relative"><span class="package-badge">🎓 Student</span><img src="https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?w=600&auto=format&fit=crop" class="h-48 w-full object-cover"><div class="p-4"><h4 class="font-bold text-lg">Bali Budget</h4><div class="flex justify-between text-sm"><span>7 Days / 6 Nights</span><span class="text-teal-700 font-bold">$449</span></div><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div></div>
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover relative"><span class="package-badge">🎓 Student</span><img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&auto=format&fit=crop" class="h-48 w-full object-cover"><div class="p-4"><h4 class="font-bold text-lg">Costa Rica Adventure</h4><div class="flex justify-between text-sm"><span>8 Days / 7 Nights</span><span class="text-teal-700 font-bold">$549</span></div><a href="#" class="mt-3 inline-block btn-gradient text-white px-5 py-2 rounded-full text-sm">Book Now</a></div></div>
+      </div>
+    </section>
+
+    <!-- bottom CTA -->
+    <div class="text-center py-6">
+      <p class="text-gray-600">Not sure which package suits you? <a href="#" class="text-teal-700 font-semibold underline decoration-amber-400">Contact our travel experts</a> for a personalized quote.</p>
+    </div>
+  </main>
+
+  <!-- ===== STICKY FOOTER ===== -->
+  <footer class="sticky footer bg-teal-900 text-white/90 py-10 px-4 mt-6">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div><h4 class="font-bold text-white">About</h4><ul class="mt-2 space-y-1 text-sm"><li>Our Story</li><li>Mission</li><li>Vision</li></ul></div>
+      <div><h4 class="font-bold text-white">Quick Links</h4><ul class="mt-2 space-y-1 text-sm"><li>Packages</li><li>Blog</li><li>FAQ</li></ul></div>
+      <div><h4 class="font-bold text-white">Contact</h4><ul class="mt-2 space-y-1 text-sm"><li>Help Center</li><li>Support</li><li>Live Chat</li></ul></div>
+      <div><h4 class="font-bold text-white">Newsletter</h4><p class="text-sm mt-2">Get updates</p><div class="flex mt-2"><input type="email" placeholder="Email" class="p-2 rounded-l text-sm flex-1"><button class="bg-amber-500 px-4 rounded-r text-sm font-semibold">Go</button></div></div>
+    </div>
+    <div class="border-t border-teal-700 mt-8 pt-6 text-center text-sm flex flex-wrap justify-center gap-4"><span>© 2026 TravelbyNeche Adventures</span><span>Privacy Policy</span><span>Terms</span><span>Booking</span><span>Testimonials</span></div>
+  </footer>
+</body>
+</html>
